@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(mContext, "ServiceConnected..", Toast.LENGTH_SHORT).show();
                 Log.d("IRemote", "Binding is done - Service connected");
 
-                addServiceAidl = IMyAdditionAidlInterface.Stub.asInterface((IBinder) service);
+                addServiceAidl = IMyAdditionAidlInterface.Stub.asInterface(service);
             }
 
             @Override
@@ -95,7 +95,9 @@ public class MainActivity extends AppCompatActivity {
         int num2 = Integer.parseInt(value2);
 
         try {
-            tvResult.setText(String.valueOf(addServiceAidl.add(num1, num2)));
+            int sum = addServiceAidl.add(num1, num2);
+            tvResult.setText(String.valueOf(sum));
+            Toast.makeText(this, "Addition result is: " + sum, Toast.LENGTH_SHORT).show();
             Log.d("IRemote", "Binding - Add operation");
         } catch (Exception e) {
             e.printStackTrace();
